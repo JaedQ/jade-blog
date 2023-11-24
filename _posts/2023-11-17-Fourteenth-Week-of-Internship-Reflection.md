@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Reflecting on the Fourteenth Week of My Internship"
+title: "Reflecting on the Test Week of My Internship"
 author: jwapano
 categories: internship
 ---
