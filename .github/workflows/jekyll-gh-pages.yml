@@ -39,15 +39,7 @@ jobs:
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
-
-  # Deploy job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ needs.build.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
+        
       - name: Deploy to Ronins Server using Rsync
         uses: burnett01/rsync-deployments@6.0.0
         with:
@@ -58,6 +50,14 @@ jobs:
           remote_user: ${{ secrets.REMOTE_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY_MC }}
 
+  # Deploy job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ needs.build.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
         id: deployment
