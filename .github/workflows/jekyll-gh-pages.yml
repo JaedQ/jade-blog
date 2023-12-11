@@ -28,20 +28,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+      - name: Setup Ruby and Bundler
+        uses: ruby/setup-ruby@v1
         with:
-          source: ./
-          destination: ./_site
+          ruby-version: 2.7
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        
+      - name: Install Bundler
+        run: gem install bundler
+
+      - name: Setup Bundler
+        run: bundle install
+
       - name: Build with Jekyll
-        # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
