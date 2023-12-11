@@ -37,7 +37,16 @@ jobs:
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
-
+  # Sync the _site directory to the shared hosting specified directory
+      - name: Deploy to Ronins Server using Rsync
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -avziO
+          path: _site/
+          remote_path: ${{ secrets.REMOTE_DEPLOYMENT_DIR }}
+          remote_host: ${{ secrets.REMOTE_HOST }}
+          remote_user: ${{ secrets.REMOTE_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY_MC }}
   # Deployment job
   deploy:
     environment:
