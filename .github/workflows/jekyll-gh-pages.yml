@@ -42,6 +42,11 @@ jobs:
       - name: Set Bundler Platform
         run: bundle config --local platform x86_64-linux
 
+      - name: Install Latest Bundler
+        run: gem install bundler
+        env:
+          BUNDLE_VERSION: 2.3.5 # Set to the latest version of Bundler
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
